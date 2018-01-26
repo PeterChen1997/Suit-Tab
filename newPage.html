@@ -1,31 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta http-equiv="cache-control" content="max-age=315600000" />
+    <title>Suit Tab</title>
     <style>
+        .clock-active .modal {
+            display: block;
+        }
+
         body {
             margin: 0;
             padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
         }
+
+        .modal {
+            position: absolute;
+            background-color: #888;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            opacity: 0.8;
+            transform: 0.5s;
+            display: none;
+        }
+
+        p {
+            margin: 0;
+        }
+
         .bg-img {
             position: absolute;
-            background-image: url('https://bing.ioliu.cn/v1?d=0&w=1920&h=1080');
+            background-color: #888;
             background-size: cover;
             width: 100%;
             height: 100%;
             z-index: -1;
+            transform: 0.5s;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-auto-rows: minmax(110px, auto);
+            grid-gap: 1em;
+            min-width: 900px;
+            justify-content: stretch;
+        }
+
+        .content {
+            /* background-color: #999; */
+            opacity: 0.8;
+            align-self: center;
+            justify-self: center;
+        }
+
+        .header {
+            grid-column: 1 / 4
+        }
+
+        .left-nav {
+            grid-row: 2 / 7;
+            align-self: stretch;
+            justify-self: center;
+        }
+
+        .right-nav {
+            grid-row: 2 / 7;
+            align-self: stretch;
+            justify-self: stretch;
+        }
+
+        .middle {
+            grid-column: 2 / 3;
+            grid-row: 2 / 7;
+
+            color: #fff;
+            font-size: 40px;
+        }
+
+        .middle .clock {
+            font-size: 120px;
+            text-shadow: 5px 5px 5px #888;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .bottom {
+            grid-column: 1 / 4;
+        }
+
+        .bookmark img {
+            width: 150px;
+            padding: 20px;
+            border-radius: 40px;
+            opacity: 0.1;
+            transition: 0.2s;
+            transform: scale(0.8);
+            margin-bottom: 60px;
+        }
+
+        .bookmark img:hover {
+            transform: scale(1);
+            opacity: 1;
+            background-color: #fff;
+            box-shadow: 10px 10px 10px #666;
+        }
+
+        .bookmark a {
+            height: 200px;
+            width: 200px;
+        }
+
+        .pomodoro button {
+            margin-top: 20px;
+            border: none;
+            width: 100%;
+            height: 50px;
+            font-size: 20px;
+            color: #999;
+            transition: 0.2s;
+        }
+
+        .pomodoro button:hover {
+            opacity: 1;
+            width: 100%;
+            height: 50px;
+            color: #333;
+            font-size: 25px;
+            background-color: #fff;
+            box-shadow: 10px 10px 5px #666;
+        }
+
+        .pomodoro button:active {
+            box-shadow: 5px 5px 5px #666;
+        }
+
+
+        .clock2 {
+            width: 30rem;
+            height: 30rem;
+            border: 20px solid white;
+            border-radius: 50%;
+            margin: 50px auto;
+            position: relative;
+            padding: 2rem;
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1),
+            inset 0 0 0 3px #EFEFEF,
+            inset 0 0 10px black,
+            0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .clock-face {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform: translateY(-3px);
+            /* account for the height of the clock hands */
+        }
+
+        .hand {
+            width: 50%;
+            height: 6px;
+            background: black;
+            position: absolute;
+            top: 50%;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition: all 0.05s;
+            transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+        }
+
+        .modal p {
+            font-size: 40px;
+            text-align: center;
+            color:#fff;
+        }
+        #stop-clock {
+            color: #990000;
+            font-size: 30px;
+            padding-top: 20px;
         }
     </style>
 </head>
-<body>
+
+<body class="loading">
     <div class="bg-img"></div>
+    <div class="modal">
+        <div class="clock2">
+            <div class="clock-face">
+                <div class="hand hour-hand"></div>
+                <div class="hand min-hand"></div>
+                <div class="hand second-hand"></div>
+            </div>
+        </div>
+        <p>25 minutes left</p>
+        <p id="stop-clock">Stop</p>
+    </div>
+
+    <div class="grid-container">
+        <div class="header content">
+
+
+        </div>
+        <div class="left-nav content">
+            <div class="bookmark">
+                <a href="https://www.bilibili.com/account/dynamic" target="_blank">
+                    <img src="./imgs/bilibili.png" alt="">
+                </a>
+            </div>
+            <div class="bookmark">
+                <a href="https://www.bilibili.com/account/dynamic" target="_blank">
+                    <img src="./imgs/bilibili.png" alt="">
+                </a>
+            </div>
+            <div class="bookmark">
+                <a href="https://www.bilibili.com/account/dynamic" target="_blank">
+                    <img src="./imgs/gmail.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="right-nav content">
+            <div class="bookmark">
+                <a href="https://github.com/" target="_blank">
+                    <img src="./imgs/github.png" alt="">
+                </a>
+            </div>
+            <div class="bookmark">
+                <a href="https://youtube.com/" target="_blank">
+                    <img src="./imgs/youtube.png" alt="">
+                </a>
+            </div>
+            <div class="bookmark">
+                <a href="https://youtube.com/" target="_blank">
+                    <img src="./imgs/gmail.png" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="middle content">
+            <div class="clock">
+                <p id="currentTime"></p>
+            </div>
+            <div class="pomodoro">
+                <p>It's time to start working</p>
+                <button type="button">Click to start pomodoro</button>
+            </div>
+        </div>
+        <div class="bottom content">
+
+
+        </div>
+    </div>
 
 
 
-
-
+    <script src="tab.js"></script>
+    <script src="pomodoro.js"></script>
 </body>
+
 </html>
