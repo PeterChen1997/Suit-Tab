@@ -13,7 +13,7 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
         .modal {
@@ -34,12 +34,27 @@
 
         .bg-img {
             position: absolute;
-            background-color: #888;
+            background-color: transparent;
+            background-position: center center;
             background-size: cover;
             width: 100%;
             height: 100%;
             z-index: -1;
-            transform: 0.5s;
+            opacity: 0;
+        }
+
+        .fadein {
+            -webkit-animation: fadein .5s ease-out 0s forwards;
+        }
+
+        @-webkit-keyframes fadein {
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
         }
 
         .grid-container {
@@ -53,7 +68,6 @@
 
         .content {
             /* background-color: #999; */
-            opacity: 0.8;
             align-self: center;
             justify-self: center;
         }
@@ -83,10 +97,10 @@
         }
 
         .middle .clock {
-            font-size: 120px;
-            text-shadow: 5px 5px 5px #888;
+            font-size: 150px;
             text-align: center;
             margin-bottom: 50px;
+            text-shadow: 0 1px 5px rgba(0,0,0,.1);
         }
 
         .bottom {
@@ -115,13 +129,18 @@
             width: 200px;
         }
 
+        .pomodoro p {
+            text-align: center;
+            font-size: 60px;
+        }
         .pomodoro button {
             margin-top: 20px;
             border: none;
             width: 100%;
             height: 50px;
-            font-size: 20px;
-            color: #999;
+            font-size: 30px;
+            background-color: transparent;
+            color: #fff;
             transition: 0.2s;
         }
 
@@ -130,7 +149,7 @@
             width: 100%;
             height: 50px;
             color: #333;
-            font-size: 25px;
+            font-size: 35px;
             background-color: #fff;
             box-shadow: 10px 10px 5px #666;
         }
