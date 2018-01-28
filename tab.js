@@ -1,4 +1,4 @@
-const bgImg = document.querySelector('.bg-img')
+const bgImg = document.querySelector('.bg-img img')
 const currentTime = document.querySelector('#currentTime')
 let r = 0
 
@@ -15,14 +15,22 @@ function updateTime() {
 }
 
 function fadeIn(img) {
-    img.classList.add('fadein')
+    if(img.complete) {
+        img.classList.add('fadein')
+        this.clearInterval(loopId)
+    }
+    console.log('loop')
 }
 
-r = Math.floor(10 * Math.random())  
+r = Math.floor(5 * Math.random()) + 1  
 
 // bgImg.style.backgroundImage = `url("https://bing.ioliu.cn/v1?d=${r}&w=1920&h=1080")`
-bgImg.style.backgroundImage = `url("./imgs/bg1.png")`
-bgImg.onLoad = fadeIn(bgImg)
+bgImg.setAttribute('src', `http://115.159.6.187/backgroundImg/bg${r}.jpg`)
+// bgImg.style.backgroundImage = `url("./imgs/bg1.png")`
+// bgImg.complete = fadeIn(bgImg)
+
+const loopId = setInterval(fadeIn.bind(this, bgImg), 10)
+
 
 
 updateTime()
