@@ -19,7 +19,6 @@ function fadeIn(img) {
         img.classList.add('fadein')
         this.clearInterval(loopId)
     }
-    console.log('loop')
 }
 
 r = Math.floor(5 * Math.random()) + 1  

@@ -5,6 +5,17 @@
     "author": "Peter Chen",
     "chrome_url_overrides": {
         "newtab": "newPage.html"
-    }
+    },
+
+    "background": {
+        "scripts":      ["weather.js"],
+        "persistent":   false
+    },
+    "permissions": [
+        "geolocation",
+        "storage",
+        "<all_urls>"
+    ],
+    "content_security_policy": "script-src 'self' https://api.caiyunapp.com; object-src 'self'"
   }
   
